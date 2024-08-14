@@ -1,0 +1,28 @@
+{
+  "name": "foodify",
+  "version": "1.0.0",
+  "description": "This is th food orderiing app",
+  "main": "App.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avashoot/Foodify.git"
+  },
+  "author": "Avadhoot Sutar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avashoot/Foodify/issues"
+  },
+  "homepage": "https://github.com/Avashoot/Foodify#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

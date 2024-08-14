@@ -1,0 +1,106 @@
+.top-nav {
+  background-color:oldlace;
+  overflow: hidden;
+}
+
+.logo {
+  padding-top: 10px;
+  width: 250px;
+}
+
+.top-nav img{
+  float: left;
+}
+
+.top-nav img:hover{
+  cursor: pointer;
+}
+
+.cart-img{
+  width: 50px;
+  margin: 5px;
+  padding: 5px;
+}
+.cart-img:hover{
+  border: 2px solid black;
+  width: 48px;
+}
+
+.nav-right{
+  float: right;
+  padding: 20px;
+  padding-top: 25px;
+}
+
+.nav-right button{
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: oldlace;
+  border: 0;
+  font-size: 25px;
+  font-family: 'Times New Roman';
+  
+}
+
+.buttons{
+  display: flex;
+}
+
+.nav-right button:hover{
+  color: gray;
+  cursor: pointer;
+}
+
+.res-card{
+  width: 250px;
+  height: 300px;
+  padding: 20px;
+
+  /* border-color: black;*/
+  /* border: 1px solid gray;  */
+  
+}
+
+.food-picture{
+  width: 100%;
+  border-radius: 10px;
+  padding-bottom: 0px;
+}
+
+.res-card:hover{
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px whitesmoke;
+  width: 240px;
+  cursor: pointer;
+}
+
+.body{
+  padding: 30px;
+}
+
+.star{
+  width: 18px;
+  height: 18px;
+  /* margin-top: px; */
+}
+
+.rating{
+  display: flex;
+  /* border: 1px solid black; */
+  text-align:right;
+  justify-content:flex-start;
+}
+
+#cusions{
+  padding-top: 3px;
+  color: rgb(78, 77, 77);
+
+}
+
+.res-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 30px;
+}
