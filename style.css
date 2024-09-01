@@ -52,9 +52,11 @@
   cursor: pointer;
 }
 
+
+/* restaurent card */
 .res-card{
   width: 250px;
-  height: 300px;
+  height: 350px;
   padding: 20px;
 
   /* border-color: black;*/
@@ -62,18 +64,47 @@
   
 }
 
+/* restaurent card image */
+.img-container{
+  position: relative;
+  width: 240px;
+  height: 200px;
+  overflow: hidden;
+  display: inline-block;
+}
+
 .food-picture{
-  width: 100%;
+  display: block;
+  width: 240px;
+  height: 180px;
   border-radius: 10px;
-  padding-bottom: 0px;
+  overflow: hidden;
+  /* padding-bottom: 0px; */
+}
+
+.offers{
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  color: white;
+  padding-top: 30px;
+  font-family: 'Gill Sans';
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  background: linear-gradient(rgba(255, 255, 255, 0),rgba(0,0,0,1));
+  transition: 100ms;
 }
 
 .res-card:hover{
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px whitesmoke;
-  width: 240px;
   cursor: pointer;
+  font-size: 95%;
+  transition: 100ms;
+  transform: scale(0.95);
 }
+
+
+
 
 .body{
   padding: 30px;
