@@ -135,3 +135,22 @@
   justify-content: center;
   padding-top: 30px;
 }
+
+
+/* filter button */
+.filter-btn{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  border: 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  transition: 100ms;
+}
+
+.filter-btn:hover{
+  cursor: pointer;
+  color: white;
+  background-color: rgb(210, 210, 211);
+}
