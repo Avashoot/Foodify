@@ -1,3 +1,5 @@
+/* Header */
+
 .top-nav {
   background-color:oldlace;
   overflow: hidden;
@@ -20,10 +22,11 @@
   width: 50px;
   margin: 5px;
   padding: 5px;
+  border: 2px solid transparent;
 }
 .cart-img:hover{
   border: 2px solid black;
-  width: 48px;
+  overflow: hidden;        
 }
 
 .nav-right{
@@ -137,7 +140,7 @@
 }
 
 
-/* filter button */
+/* filter button  and search bar */
 .filter-btn{
   margin: 10px;
   padding: 10px;
@@ -153,4 +156,89 @@
   cursor: pointer;
   color: white;
   background-color: rgb(210, 210, 211);
+}
+
+.filter{
+  display: flex;
+  flex: wrap;
+  
+}
+
+.bar{
+  margin-left:100px;
+  /* padding: 10px; */
+  border-radius: 5px;
+  width: 250px;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.search-btn{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  border: 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  transition: 100ms;
+  align-content: flex-end;
+}
+
+.search-btn:hover{
+  cursor: pointer;
+  color: white;
+  background-color: rgb(210, 210, 211);
+}
+
+
+/* Shimmer UI */
+.shimmer-card{
+  width: 250px;
+  height: 350px;
+  padding: 20px;
+}
+
+.shimmer-image{
+  display: block;
+  width: 240px;
+  height: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+
+.shimmer-text{
+  margin-top: 20px;
+  width: 240px;
+  height: 40px;
+  background-color: #f4f4f4;
+}
+
+.shimmer-details{
+  margin-top: 20px;
+  width: 240px;
+  height: 50px;
+  background-color: #f4f4f4;
+}
+
+.shimmer-button{
+  height: 43px;
+  width: 192px;
+  margin: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  border: 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  transition: 100ms;
+}
+
+.shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 3px;
+
 }
