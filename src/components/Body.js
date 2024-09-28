@@ -11,7 +11,7 @@ const Body = () => {
   );
   const [filteredRestaurent, setFilteredRestaurent] = useState([]);
 
-  console.log("Body renders");
+  // console.log("Body renders");
 
   const [searchText, setSearchText] = useState("")
 
@@ -29,7 +29,7 @@ const Body = () => {
 
     const jsonValue = await data.json();
     //These below console.log are made for information perpose n
-    console.log(jsonValue);
+    // console.log(jsonValue);
     // console.log(resList);
     // console.log(jsonValue.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
     // optional chaining

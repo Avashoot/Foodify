@@ -55,6 +55,16 @@
   cursor: pointer;
 }
 
+.custom-link{
+  color: black;
+  text-decoration: none;
+}
+
+.custom-link:hover{
+  color: gray;
+  cursor: pointer;
+}
+
 
 /* restaurent card */
 .res-card{
@@ -241,4 +251,11 @@
   justify-content: center;
   padding: 3px;
 
+}
+
+/* ROuting component */
+/* Error Component */
+.error-component{
+  display: flex;
+  justify-content: center;
 }

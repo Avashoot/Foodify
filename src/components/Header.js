@@ -1,23 +1,30 @@
 import Logo from "../../images/foodifyLogo.png";
 import cart from "../../images/cart.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const Header = () => {
   // let buttonName= "Sign in"
 
   const [buttonName, setButtonName] = useState("Sign in");
+  // console.log("Header Rendered");
+
+  useEffect(()=>{
+    // console.log("UseEffect Called");
+  },[]);
 
   return (
     <div className="top-nav">
       {/* //logo */}
       <div className="logo-container">
-        <img className="logo" src={Logo} />
+        <Link to={"/"} className="custom-link"><img className="logo" src={Logo} /></Link>
+        
       </div>
       {/* //nav iteams */}
       <div className="nav-right">
         <div className="buttons">
-          <button>Home</button>
-          <button>About us</button>
-          <button>Contact us</button>
+          {/* <button><Link to={"/"}>Home</Link></button> */}
+          <button><Link to={"/about"} className="custom-link">About us</Link></button>
+          <button><Link to={"/contact"} className="custom-link">Contact us</Link></button>
           <button
             className="login-logout"
             onClick={() => {
