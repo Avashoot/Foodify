@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   // local state variable function
@@ -13,7 +14,7 @@ const Body = () => {
 
   // console.log("Body renders");
 
-  const [searchText, setSearchText] = useState("")
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     // console.log("UseEffect called");
@@ -34,9 +35,13 @@ const Body = () => {
     // console.log(jsonValue.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
     // optional chaining
     setListOfRestaurent(
-      jsonValue?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      jsonValue?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
-    setFilteredRestaurent(jsonValue?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredRestaurent(
+      jsonValue?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
 
     // console.log(listOfRestautant)
   };
@@ -75,45 +80,60 @@ const Body = () => {
     // in this body class contains search engine and restarunt card
     <div className="body">
       <div className="filter">
-        <button
-          className="filter-btn"
-          onClick={() => {
-            //upadate the state variable
-            const filteredList = listOfRestautant.filter((res) => {
-              return res.info.avgRating > 4.2;
-            });
-            // console.log(filteredList);
-            setListOfRestaurent(filteredList);
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+        <div className="top-restaurent">
+          <button
+            className="filter-btn"
+            onClick={() => {
+              //upadate the state variable
+              const filteredList1 = filteredRestaurent.filter((res) => {
+                return res.info.avgRating > 4.1;
+              });
+              // console.log(filteredList);
+              setFilteredRestaurent(filteredList1);
+            }}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
+
         <div className="search-bar">
-          <input type="text" className="bar" value={searchText} onChange={
-            (e)=>{
-              setSearchText(e.target.value)
-            }
-          }/>
-          <button className="search-btn" onClick={
-            ()=>{
+          <input
+            type="text"
+            className="bar"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="search-btn"
+            onClick={() => {
               //Filter the restaurent card and update the UI
               //Search Text
               // console.log(searchText);
               // const previousListOfRestaurent = listOfRestautant;
-              const filteredList2 = listOfRestautant.filter((res)=>
-              {
-                return res.info.name.toLowerCase().includes(searchText.toLowerCase());
-              })
+              const filteredList2 = listOfRestautant.filter((res) => {
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
               setFilteredRestaurent(filteredList2);
-            }
-          }>Search</button>
+            }}
+          >
+            Search
+          </button>
         </div>
       </div>
       <div className="res-container">
         {
           //not using key (unacceptable) <<<<<<<< index as key <<<<<<< unique id
           filteredRestaurent.map((restaurant) => (
-            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+            <Link
+              to={"/restaurant/" + restaurant.info.id}
+              key={restaurant.info.id}
+            >
+              <RestaurantCard resData={restaurant} />
+            </Link>
           ))
         }
       </div>
