@@ -2,6 +2,8 @@ import Logo from "../../images/foodifyLogo.png";
 import cart from "../../images/cart.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+
 const Header = () => {
   // let buttonName= "Sign in"
 
@@ -11,6 +13,10 @@ const Header = () => {
   useEffect(()=>{
     // console.log("UseEffect Called");
   },[]);
+
+  const stauts = useOnlineStatus();
+
+
 
   return (
     <div className="top-nav">
@@ -23,6 +29,7 @@ const Header = () => {
       <div className="nav-right">
         <div className="buttons">
           {/* <button><Link to={"/"}>Home</Link></button> */}
+          <button>{stauts ? "🟢" : "🔴"}  Online  Status</button>
           <button><Link to={"/about"} className="custom-link">About us</Link></button>
           <button><Link to={"/contact"} className="custom-link">Contact us</Link></button>
           <button
@@ -36,6 +43,7 @@ const Header = () => {
           >
             {buttonName}
           </button>
+          <button><Link to={"/grocery"} className="custom-link">Grocery</Link></button>
           <img className="cart-img" src={cart} />
         </div>
       </div>

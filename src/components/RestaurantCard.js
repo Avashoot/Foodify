@@ -34,6 +34,7 @@ const RestaurantCard = (props) => {
             resData.info.aggregatedDiscountInfoV3.subHeader}
         </div>
       </div>
+      
       <div id="text">
         <h3 id="resName">{name}</h3>
         <div className="rating">

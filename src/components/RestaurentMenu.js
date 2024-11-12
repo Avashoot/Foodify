@@ -1,52 +1,18 @@
-import { useState, useEffect } from "react";
+import useRestaurentMenu from "../utils/useRestaurentMenu";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { RES_DETAILS_URL_1} from "../utils/constants";
+import useRestaurentMenu from "../utils/useRestaurentMenu";
 
 const RestaurentMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-  const [menuArray, setMenuArray] = useState([]);
-  const [menuArray1, setMenuArray1] = useState([]);
-  // const [filteredMenuArray, setFilteredMenuArray] = useState([]);
-  const {resId} = useParams();
-  // console.log(params)
-
-  useEffect(() => {
-    fetchMenu();
-    console.log(menuArray);
-  }, []);
-
-  const fetchMenu = async () => {
-    const data = await fetch(
-      RES_DETAILS_URL_1+resId
-    );
-
-    const jasonVal = await data.json();
-
-    console.log(jasonVal);
-    setResInfo(jasonVal.data);
-
-    let menu_array =
-      jasonVal?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
-    let menu_array1 = menu_array;
-    menu_array = menu_array.filter((cat) => cat?.card?.card?.categories);
-
-    menu_array1 = menu_array1.filter((cat)=> cat?.card?.card?.itemCards);
-
-    
-    setMenuArray(menu_array);
-    setMenuArray1(menu_array1);
-  };
-
-
-
   
+  const { resId } = useParams();
+  
+  const [resInfo, menuArray, menuArray1] = useRestaurentMenu(resId);
 
+  // console.log(menuArray);
   const { name, costForTwoMessage, avgRating, cuisines, areaName } =
     resInfo?.cards[2]?.card?.card?.info || "unknown";
 
-    
-  
   const menuData = menuArray.map((cat, index) => {
     const title = cat?.card?.card?.title;
     const catMenu = cat?.card?.card?.categories;
@@ -57,11 +23,10 @@ const RestaurentMenu = () => {
       const catTitleArray = catData?.itemCards;
       // const catTitleArray2 = menuArray1;
       // const catTitleArray = catTitleArray1.concat(catTitleArray2);
-      
 
       const insideMenu = catTitleArray.map((c) => {
         const insideMenuName = c?.card?.info?.name;
-        const menuPrice = c?.card?.info?.price / 100;
+        const menuPrice = c?.card?.info?.price / 100 || c?.card?.info?.variantsV2?.pricingModels[0]?.price /100;
         return (
           <div key={c?.card?.info?.id}>
             <h5>
@@ -90,13 +55,14 @@ const RestaurentMenu = () => {
     );
   });
 
-  const menuData1 =menuArray1.map((cat, index)=>{
+  // console.log(menuArray1)
+  const menuData1 = menuArray1.map((cat, index) => {
     const title = cat?.card?.card?.title;
-    const catMenu= cat?.card?.card?.itemCards;
+    const catMenu = cat?.card?.card?.itemCards;
 
     const insideMenu = catMenu.map((c) => {
       const insideMenuName = c?.card?.info?.name;
-      const menuPrice = c?.card?.info?.price / 100;
+      const menuPrice = c?.card?.info?.price / 100  || c?.card?.info?.variantsV2?.pricingModels[0]?.price /100;;
       return (
         <div key={c?.card?.info?.id}>
           <h5>
@@ -106,14 +72,13 @@ const RestaurentMenu = () => {
       );
     });
 
-    return(
+    return (
       <div key={index}>
         <h2>{title}</h2>
         <h3>{insideMenu}</h3>
-
       </div>
     );
-  })
+  });
 
   // console.log(filteredMenuArray);
 

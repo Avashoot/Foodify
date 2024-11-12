@@ -32,6 +32,7 @@ class UserClass extends React.Component {
   }
 
   componentWillUnmount(){
+    clearInterval(this.data)
     console.log("User componentWillUnmount")
   }
 
