@@ -1,8 +1,9 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, { OpenRestaurant } from "./RestaurantCard";
+import { useEffect, useState , useContext} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // local state variable function
@@ -16,6 +17,12 @@ const Body = () => {
   // console.log("Body renders");
 
   const [searchText, setSearchText] = useState("");
+
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  const OpenedRestaurent = OpenRestaurant(RestaurantCard);
+
+  const {loggedInUser, setUserName} = useContext(UserContext);
 
   useEffect(() => {
     // console.log("UseEffect called");
@@ -44,18 +51,18 @@ const Body = () => {
         ?.restaurants
     );
 
-    // console.log(listOfRestautant)
+    // console.log(listOfRestautant);
   };
 
-  //User online status 
+  //User online status
   const status = useOnlineStatus();
 
-  if(status === false){
+  if (status === false) {
     return (
       <>
         <h1>You are Offline</h1>
       </>
-    )
+    );
   }
 
   //conditional rendering shimmer UI
@@ -91,10 +98,9 @@ const Body = () => {
     //this is the body class
     // in this body class contains search engine and restarunt card
     <div className="body">
-      <div className="filter">
-        <div className="top-restaurent">
+      <div className="flex my-4 justify-between">
+        <div className="text-xl font-serif bg-slate-300 p-4 rounded-md hover:text-white hover:bg-slate-600 mr-4 mx-4">
           <button
-            className="filter-btn"
             onClick={() => {
               //upadate the state variable
               const filteredList1 = filteredRestaurent.filter((res) => {
@@ -108,17 +114,33 @@ const Body = () => {
           </button>
         </div>
 
-        <div className="search-bar">
+        <div>
+        <button
+            className="text-xl font-serif bg-slate-300 p-4 rounded-full hover:text-white hover:bg-slate-600 mr-4"
+          >
+            UserName : 
+          </button>
           <input
             type="text"
-            className="bar"
+            className="border border-black align-middle text-xl  mr-4 p-2 rounded-full w-64 font-serif"
+            value={loggedInUser}
+            onChange={(e) => {
+              return setUserName(e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="">
+          <input
+            type="text"
+            className="border border-black align-middle text-xl  mr-4 p-2 rounded-full w-64 font-serif"
             value={searchText}
             onChange={(e) => {
-              setSearchText(e.target.value);
+              return setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="text-xl font-serif bg-slate-300 p-4 rounded-full hover:text-white hover:bg-slate-600 mr-4"
             onClick={() => {
               //Filter the restaurent card and update the UI
               //Search Text
@@ -136,17 +158,32 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap justify-center">
         {
           //not using key (unacceptable) <<<<<<<< index as key <<<<<<< unique id
-          filteredRestaurent.map((restaurant) => (
-            <Link
-              to={"/restaurant/" + restaurant.info.id}
-              key={restaurant.info.id}
-            >
-              <RestaurantCard resData={restaurant} />
-            </Link>
-          ))
+          filteredRestaurent.map((restaurant) => {
+            // console.log(restaurant);
+            const nextCloseTime = new Date(
+              restaurant?.info?.availability?.nextCloseTime
+            );
+
+            return (
+              <Link
+                to={"/restaurant/" + restaurant.info.id}
+                key={restaurant.info.id}
+              >
+                {
+                  /* if the restaurent is Open make it vissible or make it gratscale */
+
+                  currentTime < nextCloseTime ? (
+                    <RestaurantCard resData={restaurant} />
+                  ) : (
+                    <OpenedRestaurent resData={restaurant} />
+                  )
+                }
+              </Link>
+            );
+          })
         }
       </div>
     </div>

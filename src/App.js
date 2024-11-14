@@ -1,4 +1,4 @@
-import React, { lazy, Suspense} from "react";
+import React, { lazy, Suspense, useEffect, useState} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header.js";
 import Body from "./components/Body.js";
@@ -8,6 +8,7 @@ import ContactUs from "./components/ContactUs.js"
 import ErrorComponent from "./components/ErrorComponent.js";
 import RestaurentMenu from "./components/RestaurentMenu.js";
 import { createBrowserRouter, RouterProvider  , Outlet} from "react-router-dom";
+import UserContext from "./utils/UserContext.js";
 
 // import Grocery from "./components/Grocery.js"
 
@@ -17,12 +18,31 @@ const Grocery = lazy(()=>import("./components/Grocery.js"));
 //restaurant Container
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState("default User");
+
+  useEffect(()=>{
+    //assume authentication logic and API call get the fetched data
+    const data = {
+      name : "Avadhoot Sutar",
+    };
+    setUserName(data.name);
+  }, [])
   return (
-    <div className="app">
-      {/* Header */}
-      <Header />
-      <Outlet />
-    </div>
+    //Overriding the all the values in the app by providing the data to the app through updating the userContext default value using the UserContext.provider
+    //Default value
+    <UserContext.Provider value={{loggedInUser : userName, setUserName}}>
+      {/* Avadhoot Sutar */}
+      <div className="">
+        {/* Header */}
+        {/* just for understanding of scope of the userContext Provider */}
+        {/* <UserContext.Provider value={{loggedInUser : "Monkey D Luffy"}}> */}
+          {/* Monkey D Luffy */}
+          <Header />
+        {/* </UserContext.Provider> */}
+        
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 
